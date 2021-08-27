@@ -1,0 +1,5 @@
+---
+- name: Replace form.yml
+  template:
+    src: env.j2
+    dest: "{{ env_file_loc }}/env"
