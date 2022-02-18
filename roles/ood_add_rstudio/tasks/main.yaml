@@ -4,7 +4,7 @@
     repo: '{{ rstudio_ood_repo }}'
     dest: '/var/www/ood/apps/sys/bc_rstudio_server'
     force: yes
-    version: 0.6.0
+    version: master 
 
 - name: Replace form.yml
   template:
