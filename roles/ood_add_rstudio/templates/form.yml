@@ -1,6 +1,17 @@
 ---
 cluster: "{{ cluster_name }}"
 attributes:
+  custom_environment:
+    widget: text_area
+    label: Environment Setup
+    value: |
+      # If you would like to load other modules
+      # or add other things in your environment please list below
+      #
+      # format:
+      # module load example_module/VERSION example_module2
+      # export PATH=....
+
   bc_num_hours:
     value: 1
 
@@ -54,7 +65,9 @@ attributes:
       - [ "{{ ver }}", "R/{{ ver }}"]
 {% endfor %}
 form:
-  - version
+  - custom_environment
+  - rstudio_version
+  - r_version
   - bc_num_hours
   - bc_partition
   - bc_num_slots
