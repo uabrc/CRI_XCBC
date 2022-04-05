@@ -18,6 +18,7 @@ export RSTUDIO_AUTH="${PWD}/bin/auth"
 
 # Generate an `rsession` wrapper script
 export RSESSION_WRAPPER_FILE="${PWD}/rsession.sh"
+export RSESSION_ENV_FILE="${PWD}/rsession_env"
 (
 umask 077
 sed 's/^ \{2\}//' > "${RSESSION_WRAPPER_FILE}" << EOL
