@@ -28,10 +28,19 @@ cd "${HOME}"
 # Start Integrative Genomics Viewer
 #
 
+# Determine memory for JVM in IGV
+default_jvm_other_mb=512 # default to 0.5 GB
+total_available_mb=$(($SLURM_MEM_PER_CPU * $SLURM_CPUS_PER_NODE))
+if [ $total_available_mb -le $((default_jvm_other_mb * 10)) ]; then
+  heap_available_mb=$((9 * $total_available_mb / 10)) # total < 5G --> heap = 90% of total
+else
+  heap_available_mb=$((total_available_mb - default_jvm_other_mb)) # otherwise heap = total - 512
+fi
+
 # Load the required environment
 module load <%= context.version %>
 # Launch IGV
 module list
 set -x
 igvtools_gui.command &
-igv.sh
+igv.sh -Xmx${heap_available_mb}m
