@@ -29,7 +29,7 @@
 
 #ANSYS install related
   ansys_provision: true
-  ansys_group_name: "ANSYS_GROUP"
+  ansys_group_id: "ANSYS_GROUP_ID"
   ansys_versions:
     - '2021R1'
     - "2020R2"
