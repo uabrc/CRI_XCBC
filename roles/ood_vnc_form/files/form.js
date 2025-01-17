@@ -19,6 +19,8 @@ const gpu_part_regex = /pascal|ampere/;
 function set_max_value(form_id, value) {
   const form_element = $(form_id);
   form_element.attr({'max': value});
+  if (form_element.val() > value)
+    form_element.val(value)
 }
 
 function set_partition_change_handler() {
