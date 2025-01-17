@@ -14,6 +14,8 @@ const table = {
   "amperenodes-medium": { "max_cpu": 128, "max_hour": 48, "max_gpu": 2 },
 }
 
+const gpu_part_regex = /pascal|ampere/;
+
 function set_max_value(form_id, value) {
   const form_element = $(form_id);
   form_element.attr({'max': value});
@@ -32,7 +34,7 @@ function toggle_gpu_visibility(event) {
   const gpu_selector = '#batch_connect_session_context_bc_num_gpus';
   const hour_selector = '#batch_connect_session_context_bc_num_hours';
 
-  toggle_visibilty_of_form_group(gpu_selector, table[partition]["max_gpu"] != -1);
+  toggle_visibilty_of_form_group(gpu_selector, gpu_part_regex.test(partition));
   set_max_value(cpu_selector, table[partition]["max_cpu"]);
   set_max_value(gpu_selector, table[partition]["max_gpu"]);
   set_max_value(hour_selector, table[partition]["max_hour"]);
