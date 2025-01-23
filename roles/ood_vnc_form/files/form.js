@@ -1,22 +1,26 @@
 const table = {
-  "interactive": { "max_cpu": 48, "max_hour": 2, "max_gpu": -1 },
-  "express": { "max_cpu": 48, "max_hour": 2, "max_gpu": -1 },
-  "short": { "max_cpu": 48, "max_hour": 12, "max_gpu": -1 },
+  "interactive": { "max_cpu": 48, "max_hour": 2, "max_gpu": 0 },
+  "express": { "max_cpu": 48, "max_hour": 2, "max_gpu": 0 },
+  "short": { "max_cpu": 48, "max_hour": 12, "max_gpu": 0 },
   "pascalnodes": { "max_cpu": 28, "max_hour": 12, "max_gpu": 4 },
   "pascalnodes-medium": { "max_cpu": 28, "max_hour": 48, "max_gpu": 4 },
-  "medium": { "max_cpu": 48, "max_hour": 50, "max_gpu": -1 },
-  "long": { "max_cpu": 48, "max_hour": 150, "max_gpu": -1 },
-  "intel-dcb": { "max_cpu": 24, "max_hour": 150, "max_gpu": -1 },
-  "amd-hdr100": { "max_cpu": 128, "max_hour": 150, "max_gpu": -1 },
-  "largemem": { "max_cpu": 24, "max_hour": 50, "max_gpu": -1 },
-  "largemem-long": { "max_cpu": 24, "max_hour": 150, "max_gpu": -1 },
+  "medium": { "max_cpu": 48, "max_hour": 50, "max_gpu": 0 },
+  "long": { "max_cpu": 48, "max_hour": 150, "max_gpu": 0 },
+  "intel-dcb": { "max_cpu": 24, "max_hour": 150, "max_gpu": 0 },
+  "amd-hdr100": { "max_cpu": 128, "max_hour": 150, "max_gpu": 0 },
+  "largemem": { "max_cpu": 24, "max_hour": 50, "max_gpu": 0 },
+  "largemem-long": { "max_cpu": 24, "max_hour": 150, "max_gpu": 0 },
   "amperenodes": { "max_cpu": 128, "max_hour": 12, "max_gpu": 2 },
   "amperenodes-medium": { "max_cpu": 128, "max_hour": 48, "max_gpu": 2 },
 }
 
+const gpu_part_regex = /pascal|ampere/;
+
 function set_max_value(form_id, value) {
   const form_element = $(form_id);
   form_element.attr({'max': value});
+  if (form_element.val() > value)
+    form_element.val(value)
 }
 
 function set_partition_change_handler() {
@@ -32,7 +36,7 @@ function toggle_gpu_visibility(event) {
   const gpu_selector = '#batch_connect_session_context_bc_num_gpus';
   const hour_selector = '#batch_connect_session_context_bc_num_hours';
 
-  toggle_visibilty_of_form_group(gpu_selector, table[partition]["max_gpu"] != -1);
+  toggle_visibilty_of_form_group(gpu_selector, gpu_part_regex.test(partition));
   set_max_value(cpu_selector, table[partition]["max_cpu"]);
   set_max_value(gpu_selector, table[partition]["max_gpu"]);
   set_max_value(hour_selector, table[partition]["max_hour"]);
