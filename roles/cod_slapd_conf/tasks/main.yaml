@@ -1,0 +1,11 @@
+---
+- name: Update slapd.conf
+  ansible.builtin.lineinfile:
+    path: /etc/sysconfig/slapd
+    regexp: '^SLAPD_URLS='
+    line: 'SLAPD_URLS="ldaps:/// ldapi:/// ldap:///"'
+
+- name: Restart slapd
+  ansible.builtin.service:
+    name: slapd
+    state: restarted

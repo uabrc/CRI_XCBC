@@ -1,0 +1,11 @@
+DEBUG = False
+target_groups = {
+    {% for group in target_groups %}
+    "{{ group.name }}": "{{ group.host }}",
+    {% endfor %}
+}
+{% for group in target_groups %}
+{% if group.default %}
+default_hostname = "{{ group.host }}"
+{% endif %}
+{% endfor %}
