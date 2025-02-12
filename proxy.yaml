@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - { name: 'ssh_proxy', tags: 'ssh_proxy', when: enable_ssh_proxy }
+    - { name: 'http_proxy', tags: 'http_proxy', when: enable_http_proxy }

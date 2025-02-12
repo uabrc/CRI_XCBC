@@ -1,0 +1,27 @@
+---
+- name: Get cm image path
+  find:
+    paths: "/cm/images"
+    file_type: "directory"
+  register: cm_images
+
+- name: Get all CentOS yum repo file path
+  set_fact:
+    repo_files: "{{ repo_files | default([]) + lookup('fileglob', item.path + '/etc/yum.repos.d/CentOS*.repo') | split(',') | list }}"
+  loop: "{{ cm_images.files }}"
+
+- name: Remove mirrorlist from CentOS repo files
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: '^mirrorlist'
+    replace: '#mirrorlist'
+    backup: yes
+  with_items: "{{ repo_files }}"
+
+- name: Use vault baseurl to CentOS repo files
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: '^#baseurl=http://mirror.centos.org'
+    replace: 'baseurl=http://vault.centos.org'
+    backup: yes
+  with_items: "{{ repo_files }}"
