@@ -230,20 +230,20 @@
   s3_shibboleth_object_name: UAB_SHIB_OBJECT
 
 # User Registration
-  enable_user_reg: true
-  user_register_app: "flask_user_reg"
-  user_register_app_tag: "master"
-  user_register_app_path: "/var/www/ood/register/{{ user_register_app }}"
-  user_register_app_key: "1234"
-  user_register_app_repo: "https://gitlab.rc.uab.edu/rc/self-reg-form.git"
-  user_register_app_refspec: "{{ gitlab_refspec }}"
-  user_register_app_port: 8000
-  user_register_app_host: "login005"
-  user_register_app_def_groups: []
+  enable_account_app: true
+  account_app: "account"
+  account_app_tag: "master"
+  account_app_path: "/var/www/ood/register/{{ account_app }}"
+  account_app_key: "1234"
+  account_app_repo: "https://gitlab.rc.uab.edu/rc/account-app.git"
+  account_app_refspec: "{{ gitlab_refspec }}"
+  account_app_port: 8000
+  account_app_host: "login005"
+  account_app_def_groups: []
   cors_allowed_origins: "*"
   mod_wsgi_pkg_name: "uab-httpd24-mod_wsgi"
   RegUser_app_user: "reggie"
-  RegUser_app_user_full_name: "RegUser of user register app"
+  RegUser_app_user_full_name: "Service user of account app"
   RegUser_app_user_passwd: "qweasd"
 # Authorized user group
   valid_eppa:  ["faculty", "staff", "student", "affiliate"]
@@ -292,6 +292,8 @@
   cod_deploy: true
   post_create_script: PostAddUserScript.sh
   cm_def_img_path: "/cm/images/default-image"
+  enable_cod_login_node: false
+  centos_base_url: "http://vault.centos.org"
 
 # Lmod
   lmod_loc: "/usr/share/lmod/lmod"
@@ -349,12 +351,13 @@
   go_download_url: "https://go.dev/dl/go1.22.4.linux-amd64.tar.gz"
   go_download_path: "/tmp/go1.22.4.linux-amd64.tar.gz"
   go_binary_path: "/usr/local"
-  sshpiper_git_repo: "https://github.com/eesaanatluri/sshpiper"
-  sshpiper_version: "feat-routing-by-group"
+  sshpiper_git_repo: "https://github.com/tg123/sshpiper"
+  sshpiper_version: "3dda361863e1eb2ceac1a421456b7c2f47987776"
   sshpiper_dest_dir: "/opt/sshpiper"
   sshpiper_bin_dir: "{{ sshpiper_dest_dir }}/out"
   sshpiper_bantime: 1200s
   sshpiper_maxfailures: 5
+  sshpiper_whitelist: "127.0.0.1/8"
 
 # http_proxy
   enable_http_proxy: false

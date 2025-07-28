@@ -21,7 +21,7 @@
     - { name: 'ood_easter_egg', tags: 'ood_easter_egg' }
     - { name: 'ood_static_user_reg', tags: 'ood_static_user_reg', when: enable_user_reg == false }
     - { name: 'ood_shib_sso', tags: 'ood_shib_sso', when: enable_shib }
-    - { name: 'ood_user_reg', tags: 'ood_user_reg', when: enable_user_reg }
+    - { name: 'ood_user_reg', tags: 'ood_user_reg', when: enable_account_app }
     - { name: 'warewulf_sync', tags: 'warewulf_sync' }
     - { name: 'ood_enable_sandbox', tags: 'ood_enable_sandbox', when: enable_sandbox }
     - { name: 'ood_jupyter_lab', tags: 'ood_jupyter_lab', when: jupyter_provision}

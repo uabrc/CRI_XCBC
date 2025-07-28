@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart= {{ sshpiper_bin_dir }}/sshpiperd -p 22 --log-level=trace {{ sshpiper_bin_dir }}/yaml --config {{ sshpiper_dest_dir }}/sshpiperd.yaml --no-check-perm -- {{ sshpiper_bin_dir }}/failtoban --max-failures {{ sshpiper_maxfailures }} --ban-duration {{ sshpiper_bantime }}
+ExecStart= {{ sshpiper_bin_dir }}/sshpiperd --upstream-banner-mode dedup -p 22 -i '/etc/ssh/ssh_host_[er]*_key' --log-level=trace {{ sshpiper_bin_dir }}/yaml --config {{ sshpiper_dest_dir }}/sshpiperd.yaml --no-check-perm -- {{ sshpiper_bin_dir }}/failtoban --max-failures {{ sshpiper_maxfailures }} --ban-duration {{ sshpiper_bantime }} --ignore-ip {{ sshpiper_whitelist }}
 Restart=on-failure
 User=root
 
