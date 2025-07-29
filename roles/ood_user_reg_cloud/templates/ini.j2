@@ -18,7 +18,7 @@
 #       range.
 #
 
-bind = '127.0.0.1:{{ user_register_app_port }}'
+bind = '127.0.0.1:{{ account_app_port }}'
 backlog = 2048
 
 #
@@ -146,10 +146,10 @@ spew = False
 #
 
 #errorlog = '-'
-errorlog = '/var/log/{{ user_register_app }}/error.log'
+errorlog = '/var/log/{{ account_app }}/error.log'
 loglevel = 'info'
 #accesslog = '-'
-accesslog = '/var/log/{{ user_register_app }}/access.log'
+accesslog = '/var/log/{{ account_app }}/access.log'
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
 #

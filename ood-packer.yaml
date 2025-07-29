@@ -10,8 +10,8 @@
     - { name: 'ood_shib_config', tags: 'ood_shib_config', when: configure_shib }
     - { name: 'ood_enable_ssl', tags: 'ood_enable_ssl' }
     - { name: 'enable_lmod', tags: 'enable_lmod' }
-    - { name: 'ood_user_reg_ops', tags: 'ood_user_reg_cloud' }
-    - { name: 'ood_user_reg_cloud', tags: 'ood_user_reg_cloud' }
+    - { name: 'ood_user_reg_ops', tags: 'ood_user_reg_cloud', when: enable_account_app }
+    - { name: 'ood_user_reg_cloud', tags: 'ood_user_reg_cloud', when: enable_account_app }
     - { name: 'ood_vnc_form', tags: 'ood_vnc_form' }
     - { name: 'ood_jupyter', tags: 'ood_jupyter', when: jupyter_provision}
     - { name: 'ood_jupyterlab', tags: 'ood_jupyterlab', when: jupyterlab_provision}

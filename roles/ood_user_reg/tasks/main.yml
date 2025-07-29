@@ -15,26 +15,26 @@
 
 - name: Remove existing user register app install
   file:
-    path: "{{ user_register_app_path }}"
+    path: "{{ account_app_path }}"
     state: absent
 
 - name: Creates directory to clone the user register app
   file:
-    path: "{{ user_register_app_path }}"
+    path: "{{ account_app_path }}"
     state: directory
 
 - name: Clone user register app form from gitlab
   git:
-    repo: "{{ user_register_app_repo }}"
-    dest: "{{ user_register_app_path }}"
-    refspec: "{{ user_register_app_refspec }}"
-    version: "{{ user_register_app_tag }}"
+    repo: "{{ account_app_repo }}"
+    dest: "{{ account_app_path }}"
+    refspec: "{{ account_app_refspec }}"
+    version: "{{ account_app_tag }}"
 
 - name: Install requirements in virtualenv
   pip:
     requirements: requirements.txt
     virtualenv: venv
-    chdir: "{{ user_register_app_path }}"
+    chdir: "{{ account_app_path }}"
 
 - name: Put apache config file in place
   template:
@@ -44,7 +44,7 @@
 - name: Put wsgi config file in place
   template:
     src: wsgi.j2
-    dest: "{{ user_register_app_path }}/{{ user_register_app }}.wsgi"
+    dest: "{{ account_app_path }}/{{ account_app }}.wsgi"
 
 - name: Enable user registration redirect
   replace:
@@ -54,8 +54,8 @@
     backup: yes
   with_items:
       - { regexp: "^#?(user_map_cmd:).*", replace: "\\1 '/opt/ood/ood_auth_map/bin/uab_ood_auth.regex'" }
-      - { regexp: "^#?(map_fail_uri:).*", replace: "\\1 '/{{ user_register_app }}'" }
-      - { regexp: "^#?(register_uri:).*", replace: "\\1 '/{{ user_register_app }}'" }
+      - { regexp: "^#?(map_fail_uri:).*", replace: "\\1 '/{{ account_app }}'" }
+      - { regexp: "^#?(register_uri:).*", replace: "\\1 '/{{ account_app }}'" }
 
 - name: Stage regex file for ood
   copy:

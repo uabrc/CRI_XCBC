@@ -15,4 +15,4 @@
     - { name: 'ohpc_igv', tags: 'ohpc_igv', when: igv_provision }
     - { name: 'ohpc_ansys', tags: 'ohpc_ansys', when: ansys_provision }
     - { name: 'ohpc_add_rstudio', tags: 'ohpc_add_rstudio', when: rstudio_provision }
-    - { name: 'ohpc_user_reg', tags: 'ohpc_user_reg', when: enable_user_reg }
+    - { name: 'ohpc_user_reg', tags: 'ohpc_user_reg', when: enable_account_app }

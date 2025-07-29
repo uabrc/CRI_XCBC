@@ -33,13 +33,13 @@
         dest: "/cm/images/login-image/opt/rh/httpd24/root/etc/httpd/conf.d/{{ item }}"
         state: absent
       loop:
-        - "user-reg-{{ user_register_app }}.conf"
+        - "user-reg-{{ account_app }}.conf"
         - "user-reg.conf"
 
     - name: Replace account app conf
       ansible.builtin.template:
         src: user-reg-account_conf.j2
-        dest: "/cm/images/login-image/opt/rh/httpd24/root/etc/httpd/conf.d/user-reg-{{ user_register_app }}.conf"
+        dest: "/cm/images/login-image/opt/rh/httpd24/root/etc/httpd/conf.d/user-reg-{{ account_app }}.conf"
 
     - name: Create ood app folders
       ansible.builtin.file:

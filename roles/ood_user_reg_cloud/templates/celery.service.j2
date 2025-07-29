@@ -8,9 +8,9 @@ StartLimitInterval=0
 Restart=always
 RestartSec=5
 User={{ celery_user }}
-WorkingDirectory={{ user_register_app_path }} 
-Environment="PATH={{ user_register_app_path }}/venv/bin"
-ExecStart={{ user_register_app_path }}/venv/bin/celery -A tasks worker --loglevel=info --concurrency=4
+WorkingDirectory={{ account_app_path }} 
+Environment="PATH={{ account_app_path }}/venv/bin"
+ExecStart={{ account_app_path }}/venv/bin/celery -A tasks worker --loglevel=info --concurrency=4
 
 [Install]
 WantedBy=multi-user.target
